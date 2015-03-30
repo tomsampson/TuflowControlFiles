@@ -1,0 +1,33 @@
+! Define coordinate system
+SHP Projection == ..\..\..\..\model\GIS\Irish National Grid.prj
+GIS Projection Check == WARNING
+
+! Read in 1D ISIS network (including nodes) plus WLL lines (for enabling 1D results in SMS)
+Read GIS ISIS Network == ..\..\..\..\model\GIS\1d_nwk_Ballina_007_P.shp
+Read GIS ISIS Network == ..\..\..\..\model\GIS\1d_nwk_Ballina_006_L.shp
+Read GIS ISIS WLL == ..\..\..\..\model\GIS\1d_WLL_Ballina_011_L.shp
+
+
+! Read 2D boundary condition geometry file
+BC Control File == ..\..\..\..\model\Ballina_016_Option2.tbc
+
+
+! Read materials file
+Read Materials File == ..\..\..\..\model\Ballina_001_Updated_Roughness.tmf 
+
+
+! Set required output formats
+Map Output Data Types == d v h ZUK0 MB1 !MB2 
+Map Output Formats == DAT ASC
+Maximums and Minimums Only for GRID == ON
+UK Hazard Formula == D*(V+0.5)+DF
+UK Hazard Debris Factor == 0
+Start Map Output == 0
+Map Output Interval == 1800 ! every 1/2 hour(s)
+Store Maximums and Minimums == ON MAXIMUMS ONLY  
+Read GIS PO == ..\..\..\..\model\GIS\2d_po_Ballina_001_L.shp
+Time Series Output Interval == 300 !every 5 minutes - same as ISIS 1D model
+
+
+screen/log display interval == 1200 !  Every x minutes model time (depending on 2D time step)
+

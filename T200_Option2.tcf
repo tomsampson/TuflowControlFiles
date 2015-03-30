@@ -1,0 +1,11 @@
+! Read all common commands
+Read File == ..\..\..\Ballina_Common_Commands_017_Option2.trd
+
+!Read geometry file
+Geometry Control File == ..\..\..\..\model\Ballina_016_Option2.tgc
+
+! Output File Location
+Output Folder == ..\..\..\..\Results\Scenario\Option2\T200\TUFLOW\
+
+!Check File Location - only for 100yr results
+!Write Check Files == ..\..\..\..\Check\Scenario\Option2\T200\TUFLOW\

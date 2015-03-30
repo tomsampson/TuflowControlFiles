@@ -1,0 +1,21 @@
+!*****************************************************************************
+!********** MATERIALS DEFINITION FILE FOR FINAL MODEL DEVELOPMENT ************
+!*****************************************************************************
+
+!#############################################################################
+! LINK MATERIALS VALUES TO MANNING'S 'N' ROUGHNESS VALUES
+!#############################################################################
+
+! Based on OSi NTF data
+
+1, 0.040 ! General Natural Surfaces
+2, 0.300 ! Buildings
+3, 0.035 ! Inland Water
+5, 0.015 ! Roads, Tracks and Paths
+7, 0.070 ! Non-coniferous Woodland
+9, 0.100 ! Coniferous Trees
+10, 0.017 ! General Manmade Surfaces
+12, 0.200 ! Glasshouses
+13, 0.050 ! Rock
+14, 0.080 ! Mixed Vegetation
+99, 0.500 ! Stability Patches

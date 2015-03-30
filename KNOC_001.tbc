@@ -1,0 +1,4 @@
+
+! Define 2D hydraulic boundaries
+Read GIS BC == GIS\2d_bc_KNOC_002_L.shp 			! Spill line between ISIS & TUFLOW
+Read GIS BC == GIS\2d_bc_Moy_001_L.shp				! boundary with River Moy

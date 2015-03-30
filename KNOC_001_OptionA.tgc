@@ -1,0 +1,81 @@
+
+! DEFINE THE ACTIVE GRID
+
+Origin == 124501, 318584 			! bottom left corner of grid
+Orientation == 125366, 319330		! another point along the x-axis of the grid
+Cell Size == 2  					! cell size in meters
+Grid Size (X,Y) == 2000, 3000	   	! grid dimensions in meters
+
+!************************************************************************************************************************
+
+! Define active cells
+
+Set Code == 0 							! Set all cells to inactive
+Read GIS Code == GIS\2d_code_KNOC_active_001_R.shp		 		! Define active area
+Read GIS Code == GIS\2d_code_KNOC_inactive_001_R.shp			! Remove River Bunree from active 2D domain 
+
+
+!************************************************************************************************************************
+
+! Define topography
+
+! Read in the base zpts
+Set zpts == 0
+Read GRID Zpts == lidar\lidar_2m_dtm_grd_096.txt		
+
+!#############################################################################
+! WRITE GRID CHECK FILE
+!#############################################################################
+
+!Write GIS Zpts == GIS\2d_zpt_KNOC_001_P.shp ! writes the locational data for the base z-points. Elevation to be interrogated from DTM late - not needed any more
+!Write GIS Domain == ..\check\KNOC_001_dom_check_R.shp  ! writes the grid to be checked for cell size, extent and coding
+!Write GIS Grid == ..\check\KNOC_001_2d_grd.shp
+!Stop  ! stops the simulation from continuing
+
+!************************************************************************************************************************
+
+! Fluvial bank crests are based on 1) de-activation points, 2) surveyed levels
+Read GIS Z HX Line == GIS\2d_bc_KNOC_002_L.shp | GIS\2d_bc_KNOC_002_downstreamWall_P.shp
+
+! Read building thresholds as mean LIDAR
+Read GIS Zpts == GIS\2d_zsh_Ballina_Buildings_001_R.shp
+
+!River Moy Bank crest levels
+Read GIS Z HX Line == GIS\2d_bc_Moy_001_L.shp | GIS\2d_bc_Moy_001_Option2_P.shp
+
+!Downstream wall
+Read GIS Z Line == GIS\2d_zln_downstreamWall_001_L.shp | GIS\2d_zln_downstreamWall_001_P.shp 
+
+!Upstream wall
+Read GIS Z Line == GIS\2d_zln_upstreamWall_001_L.shp | GIS\2d_zln_upstreamWall_001_P.shp
+
+!Smooth LiDAR for stability
+!Read GIS Zpts == GIS\2d_zsh_Stability_001_R.shp	! fills in road level at unstable locations
+
+
+!************************************************************************************************************************
+!************************************************************************************************************************
+
+! Define 2D roughness
+Set Mat == 1
+Read GIS Mat == GIS\Material_3_Inland_Water_001_R.shp
+Read GIS Mat == GIS\Material_1_General_Natural_Surfaces_001_R.shp	
+Read GIS Mat == GIS\Material_9_Coniferous_Trees_001_R.shp	
+Read GIS Mat == GIS\Material_14_MixedVegetation_001_R.shp	
+Read GIS Mat == GIS\Material_7_Nonconiferous_Woodland_001_R.shp	
+Read GIS Mat == GIS\Material_13_Rock_001_R.shp	
+Read GIS Mat == GIS\Material_5_Roads_Tracks_Paths_001_R.shp	
+! Read GIS Mat == GIS\Material_10_General_Manmade_Surfaces.shp		! None in study area
+Read GIS Mat == GIS\Material_12_Glass_Houses_001_R.shp		
+Read GIS Mat == GIS\Material_2_Buildings_001_R.shp	
+! Read GIS Mat == GIS\2d_mat_Ballina_001_R.shp			! 2D roughness stability patches
+				
+!--------------------------------------------------------------------------------!
+! ADDITIONAL SCENARIOS 
+
+! IF SCENARIO == XXXXXX
+! 	! Commands to change baseline geometry if needed (see TUFLOW manual for examples).	
+! END IF
+
+
+!--------------------------------------------------------------------------------!
